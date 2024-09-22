@@ -9,8 +9,9 @@ import {
     faPlane,
     faTaxi,
   } from "@fortawesome/free-solid-svg-icons";
-  
+  import {useNavigate} from 'react-router-dom'
 const Hearder = ({type}) => {
+    const [destination,setDestination]=useState("")
     const [openOptions,setOpenOptions]=useState(false)
     const [options,setOptions]=useState({
         adult: 1,
@@ -23,6 +24,10 @@ const Hearder = ({type}) => {
             ...prev,
             [name]: operation=='i'?options[name]+1:options[name]-1
         }})
+    }
+    const navigate=useNavigate()
+    const handleSearch=()=>{
+        navigate('/hotels',{state:{destination,options}})
     }
   return (
     <div className='header'>
@@ -59,7 +64,9 @@ const Hearder = ({type}) => {
         <div className="headerSearch">
             <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
-                <input type="text" placeholder='where are you going' className='headerSearchInput' />
+                <input type="text" placeholder='where are you going' className='headerSearchInput'
+                onChange={e=>setDestination(e.target.value)} 
+                />
             </div>
             <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
@@ -106,7 +113,7 @@ const Hearder = ({type}) => {
                 }
             </div>
             <div className="headerSearchItem">
-                <button className='headerBtn'>Search</button>
+                <button className='headerBtn' onClick={handleSearch}>Search</button>
             </div>
         </div></>}
       </div>
