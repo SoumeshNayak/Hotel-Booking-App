@@ -3,6 +3,7 @@ import Navbar from '../../components/nevbar/Navbar'
 import Hearder from '../../components/header/Hearder'
 import './list.css'
 import { useLocation } from 'react-router-dom'
+import SearchItem from '../../components/searchItem/SearchItem'
 const List = () => {
   const location =useLocation()
   const [destination,setDestination]=useState(location.state.destination)
@@ -71,7 +72,16 @@ const List = () => {
           <button>Search</button>
           </div>
           <div className="listResult"> 
-
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
+              <SearchItem/>
           </div>
         </div>
       </div>

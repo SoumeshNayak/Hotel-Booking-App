@@ -18,6 +18,7 @@
     border-radius: 10px;
     position: sticky;
     top: 10px;
+    height: max-content;
 }
 
 .lsTitle{
@@ -62,11 +63,11 @@
 }
 .listSearch>button{
     padding: 10px;
-    background-color: #0071c2;
-    color: wheat;
+    background-color: #045189;
+    color: white;
     border: none;
     width: 100%;
-    font-weight:500 ;
+    font-weight:bold ;
     cursor: pointer;
 }
 .listResult{
