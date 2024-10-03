@@ -1,17 +1,21 @@
 import React from 'react'
 import './featured.css'
+import UseFet from '../../hooks/UseFet'
 const Featured = () => {
+  const {data,loading,error} = UseFet("http://localhost:8800/hotels/countByCity?cities=berlin,madrid,london")
+ 
+  
   return (
     <div className='featured'>
-      <div className="featuredItem">
+      {loading ? "Loading.." : <><div className="featuredItem">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEHlIxXPvLUwZrxzSqNmLPGN5inEkvoS1ahQ&s"
           alt=""
           className="featuredImg"
         />
         <div className="featuredTitles">
-          <h1>INDIA</h1>
-          <h2>123 properties</h2>
+          <h1>Berlin</h1>
+          <h2>{data[0]} properties</h2>
         </div>
       </div>
       
@@ -22,8 +26,8 @@ const Featured = () => {
           className="featuredImg"
         />
         <div className="featuredTitles">
-          <h1>Reno</h1>
-          <h2>533 properties</h2>
+          <h1>Madrid</h1>
+          <h2>{data[1]} properties</h2>
         </div>
       </div>
       <div className="featuredItem">
@@ -33,10 +37,10 @@ const Featured = () => {
           className="featuredImg"
         />
         <div className="featuredTitles">
-          <h1>Austin</h1>
-          <h2>532 properties</h2>
+          <h1>London</h1>
+          <h2>{data[2]} properties</h2>
         </div>
-      </div>
+      </div></>}
     </div>
   )
 }
