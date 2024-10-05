@@ -4,11 +4,18 @@ import Hearder from '../../components/header/Hearder'
 import './list.css'
 import { useLocation } from 'react-router-dom'
 import SearchItem from '../../components/searchItem/SearchItem'
+import UseFet from '../../hooks/UseFet'
 const List = () => {
   const location =useLocation()
   const [destination,setDestination]=useState(location.state.destination)
   const [options,setOptions]=useState(location.state.options)
-  
+  const [mini,setMini]=useState(undefined);
+  const [maxi,setMaxi]=useState(undefined);
+
+  const {data,loading,error,reFetch}=UseFet(`http://localhost:8800/hotels?city=${destination}&mini=${mini || 0}&maxi=${maxi || 999}`)
+  const handleClick=()=>{
+    reFetch()
+  }
   return (
     <div>
       <Navbar/>
@@ -32,13 +39,13 @@ const List = () => {
                 <span className="lsOptionText">
                     Min price <small>per night</small>
                 </span>
-                <input type="number" className="lsOptionInput" />
+                <input type="number" onChange={e=>setMini(e.target.value)} className="lsOptionInput" />
             </div>
             <div className="lsOptionItem">
                 <span className="lsOptionText">
                     Max price <small>per night</small>
                 </span>
-                <input type="number" className="lsOptionInput" />
+                <input type="number" onChange={e=>setMaxi(e.target.value)} className="lsOptionInput" />
             </div>
             <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
@@ -69,19 +76,14 @@ const List = () => {
                 </div>
             </div>
           </div>
-          <button>Search</button>
+          <button onClick={handleClick}>Search</button>
           </div>
           <div className="listResult"> 
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
-              <SearchItem/>
+            {loading ? "loading...":<>
+              {data.map(item=>(
+                <SearchItem item={item} key={item._id}/>
+              ))}
+            </>}
           </div>
         </div>
       </div>

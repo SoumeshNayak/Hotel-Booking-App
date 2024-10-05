@@ -17,8 +17,8 @@ const UseFet = (url)=>{
         setLoading(false)
        } 
        fetchData()
-    },{url})
-    const refetch = async()=>{
+    },[url])
+    const reFetch = async()=>{
         setLoading(true)
         try {
             const res=await axios.get(url)
@@ -28,6 +28,6 @@ const UseFet = (url)=>{
         }
         setLoading(false)
     }
-    return {data,loading,error,refetch}
+    return {data,loading,error,reFetch}
 }
 export default UseFet
