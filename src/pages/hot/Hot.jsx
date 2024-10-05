@@ -6,7 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import MailList from '../../components/mailList/MailList'
 import Footer from '../../components/footer/Footer'
+import UseFet from '../../hooks/UseFet'
+import { useLocation } from 'react-router-dom'
 const Hot = () => {
+  const location=useLocation()
+  const id=location.pathname.split("/")[2]
+  const {data,loading,error}=UseFet(`http://localhost:8800/hotels/find/${id}`)
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -32,46 +37,36 @@ const Hot = () => {
     <div>
       <Navbar/>
       <Hearder type="list"/>
-      <div className="hotelContainer">
+      {loading?"loding..":(<div className="hotelContainer">
         <div className="hotelWrapper">
         <button className="bookNow">Reserve or Book Now!</button>
             <h1 className="hotelTitle">
-              Grand Hotel
+              {data.name}
             </h1>
             <div className="hotelAdress">
               <FontAwesomeIcon icon={faLocationDot}/>
-              <span>Mumbai 210 lane</span>
+              <span>{data.address}</span>
             </div>
             <span className="hotelDistance">
-            Excellent location – 500m from center
+            Excellent location – {data.distance}m from center
             </span>
             <span className="hotelPriceHighlight">
-            Book a stay over $114 at this property and get a free airport taxi
+            Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
             </span>
             <div className="hotelImages">
               {
-                photos.map(photo=>(
+                data.photos?.map(photo=>(
                   <div className="hotelImgWrapper">
-                    <img src={photo.src} alt="" className='hotelImg'/>
+                    <img src={photo} alt="" className='hotelImg'/>
                   </div>
                 ))
               }
             </div>
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">Stay in the heart of City</h1>
+              <h1 className="hotelTitle">{data.title}</h1>
               <p className="hotelDesc">
-                Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service.
+                {data.desc}
               </p>
               </div>
               <div className="hotelDetailsPrice">
@@ -89,7 +84,7 @@ const Hot = () => {
         </div>
         <MailList/>
         <Footer/>
-      </div>
+      </div>)}
     </div>
   )
 }
