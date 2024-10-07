@@ -1,3 +1,13 @@
+### OVERVIEW OF PROJECT
+1> Efficient Frontend with React JS: Developed a dynamic hotel booking platform using React JS, implementing Hooks and Context API to manage state and authentication flow across the app, ensuring a seamless user experience.
+
+2> Real-Time Hotel Availability: Built a booking system that dynamically updates hotel availability, preventing double booking by using real-time data and state management, ensuring each hotel is available to only one user at a time.
+
+3> Secure Authentication with JWT: Integrated JSON Web Token (JWT) for secure authentication and session management, ensuring that user data and booking sessions remain protected, along with cookie parsing for session persistence.
+
+4> Scalable Backend with Node.js & MongoDB: Designed a robust and scalable backend using Node.js, Express, and MongoDB, with Mongoose as an ODM, enabling efficient data storage and retrieval for handling user accounts, hotel listings, and booking records.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +78,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
